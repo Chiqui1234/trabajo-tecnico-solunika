@@ -1,4 +1,5 @@
 #include "funciones.h"
+
 /**
  * @param int *numeros espera un puntero o array
  * @param int cant limita la cantidad de ciclos a recorrer
@@ -24,30 +25,26 @@ void ordenarNumeros(int *numeros, int cant)
 /**
  * @param char valores[] espera un conjunto de caracteres que analizará para determinar si son números
  * @param int numeros[] es un array dónde se almacenan los números que se convirtieron de string a int
+ * @param int j se usa para no dejar baches en numeros[], en el caso de que el parámetro valores[] no sea un número
  * @param int cant limita la cantidad de ciclos a recorrer
  */
-BOOL strToInt(char valores[], int numeros[], int cant)
+BOOL esCharNumero(char valores[], int numeros[], int j, int cant)
 {
-    int j = 0; // Este contador evita los casos dónde hay un caracter que no puede ser parseado a int. De tal forma que no habrá "espacios en blanco" en numeros[]. En este ejercicio no sirve de mucho pero sería útil en otros ámbitos
     for(int i = 0;i < cant;i++)
-    {
-        if( isalpha(valores[i]) != 0 ) // Si es != 0 se debe a que encontró una letra
+        if( isalpha(valores[i]) != 0 ) // Si es != es porque encontró una letra
             return FALSE;
-        else // Si es un número, lo convierto
-            numeros[j] = parseInt(valores[i]);
-        j++;
-    }
-        
+    // Si no se encontró una letra
+    numeros[j] = atoi(valores);
+    return TRUE;
 }
-
-void imprimirCapicua(int numeros[], int cant)
+BOOL imprimirCapicua(char *valores)
 {
-    for(int i = 0;i < cant;i++)
+    int largo = strlen(valores);
+    for(int i = 0;i < largo;i++)
     {
-        if(numeros[i] != numeros[cant-i])
-            return; // Si son distintos éste número no es capicúa y salgo de la función
+        if( *(valores+i) != *(valores+largo-i-1) || largo < 3 || isalpha(*(valores+i)) != 0 ) // Si != 0 es porque encontró una letra.
+            return FALSE;
     }
-    printf("¡El número es capicúa! ");
-    for(int i = 0;i < cant;i++)
-        printf("%d", numeros[i]);
+    printf("^ ¡El número es capicúa!\n");
+    return TRUE;
 }

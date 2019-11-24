@@ -9,7 +9,7 @@
             "command": "/usr/bin/gcc",
             "args": [
                 "-g",
-                "${fileDirname}/ejercicio1.c",
+                "${file}",
                 "${fileDirname}/funciones.c",
                 "-o",
                 "${fileDirname}/${fileBasenameNoExtension}"
