@@ -7,7 +7,6 @@
 void ordenarNumeros(int *numeros, int cant)
 {
     // Esto es un burbujeo (bubble sort) convencional
-    int i = 0, j = 0;
     int aux;
     for(int i = 0;i < cant;i++)
     {
