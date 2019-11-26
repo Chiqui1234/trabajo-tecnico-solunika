@@ -8,8 +8,10 @@ void ordenarNumeros(int *numeros, int cant)
 {
     // Esto es un burbujeo (bubble sort) convencional
     int aux;
-    for(int i = 0;i < cant;i++)
+    BOOL cambios = TRUE;
+    for(int i = 0;i < cant && cambios;i++)
     {
+        cambios = FALSE;
         for(int j = 0;j < cant-1-i;j++) // -1 para no irme del rango de numeros[] y -i para ahorrar ciclos (se supone que en cada ciclo del for() grande organizo al menos un número)
         {
             if( *(numeros+j) > *(numeros+j+1)  ) // Si el número actual es mayor al siguiente
@@ -17,6 +19,7 @@ void ordenarNumeros(int *numeros, int cant)
                 aux = *(numeros+j+1); // Guardo el siguiente en un auxiliar
                 *(numeros+j+1) = *(numeros+j); // Sobre-escribo el siguiente con el número actual
                 *(numeros+j) = aux; // Restauro el número siguiente para re-ubicarlo en la posición actual :)
+                cambios = TRUE;
             }
         }
     }   
